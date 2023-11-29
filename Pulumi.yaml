@@ -1,0 +1,3 @@
+name: csye6215-serveless
+runtime: go
+description: A minimal AWS Go Pulumi program
