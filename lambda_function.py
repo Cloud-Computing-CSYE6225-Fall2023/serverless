@@ -36,6 +36,7 @@ def lambda_handler(event, context):
 
         elif file_upload_resp["statusCode"] == 500:
             data["status"] = "failed to download, please recheck the url submitted and the file contents"
+            data["path"] = ""
 
             send_email(data)  # Send email
             track_emails_to_db(data)  # Update to dynamo DB
@@ -44,6 +45,7 @@ def lambda_handler(event, context):
 
     elif file_download_resp["statusCode"] == 500:
         data["status"] = "failed to download, please recheck the url submitted and the file contents"
+        data["path"] = ""
 
         send_email(data)  # Send email
         track_emails_to_db(data)  # Update to dynamo DB
