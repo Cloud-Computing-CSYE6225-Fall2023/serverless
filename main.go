@@ -296,7 +296,7 @@ func main() {
 				Name:    pulumi.String(configData.ResourceParams.LambdaFuncName),
 				Handler: pulumi.String("lambda_function.lambda_handler"),
 				Role:    lambdaRole.Arn,
-				Timeout: pulumi.Int(5),
+				Timeout: pulumi.Int(15),
 				Runtime: pulumi.String("python3.11"),
 				Architectures: pulumi.StringArray{
 					pulumi.String("arm64"),

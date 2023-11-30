@@ -36,6 +36,7 @@ def lambda_handler(event, context):
 
         elif file_upload_resp["statusCode"] == 500:
             data["status"] = "failed to download, please recheck the url submitted and the file contents"
+            data["path"] = ""
 
             send_email(data)  # Send email
             track_emails_to_db(data)  # Update to dynamo DB
@@ -44,6 +45,7 @@ def lambda_handler(event, context):
 
     elif file_download_resp["statusCode"] == 500:
         data["status"] = "failed to download, please recheck the url submitted and the file contents"
+        data["path"] = ""
 
         send_email(data)  # Send email
         track_emails_to_db(data)  # Update to dynamo DB
@@ -59,7 +61,7 @@ def lambda_handler(event, context):
 #             "id": "7121",
 #             "email": "ruthala.s@northeastern.edu"
 #         },
-#         "submission_url": "https://github.com/readmeio/import-samples/raw/master/import-sample-multiple-versions.zip",
+#         "submission_url": "https://github.com/tparikh/myrepo/archive/refs/tags/v1.0.0.zip",
 #         "submission_date": "2023-11-24T09:00"
 #     }
 #     print(lambda_handler(d, ""))

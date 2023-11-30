@@ -1,7 +1,6 @@
 import os
-import uuid
+import tempfile
 import zipfile
-import shutil
 from google.cloud import storage
 from datetime import datetime, timedelta
 
@@ -43,29 +42,21 @@ def write_to_blob(file_resp, file_path):
         bucket = storage_client.bucket(bucket_name)
         blob = bucket.blob(file_path)
 
-        randomId = str(uuid.uuid4())
-        destinationPath = "./" + randomId + ".zip"
-        with open(destinationPath, 'wb') as file:
+        # Create a temporary file
+        with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+            temp_file_path = temp_file.name
+
+            # Write the content to the temporary file
             for chunk in file_resp.iter_content(chunk_size=8192):
                 if chunk:
-                    file.write(chunk)
-            file.seek(0)
+                    temp_file.write(chunk)
 
-            extract_to = "./" + randomId
-            extract_zip(destinationPath, extract_to)
-            if get_extracted_size(extract_to) == 0:
-                return {
-                    "statusCode": 500,
-                    "msg": "Empty Zip file"
-                }
-
-            blob.upload_from_filename(destinationPath, content_type='application/zip')
+            temp_file.seek(0)
+            blob.upload_from_file(temp_file, content_type='application/zip')
             expiration_time = datetime.utcnow() + timedelta(minutes=10)
 
-            file.close()
-
-        os.remove(destinationPath)
-        shutil.rmtree(extract_to)
+            # Close the temp file, this will delete the file
+            temp_file.close()
 
         return {
             "statusCode": 200,
@@ -76,5 +67,6 @@ def write_to_blob(file_resp, file_path):
     except Exception as err:
         return {
             "statusCode": 500,
+            "path": "",
             "msg": "Error Uploading file to GCS: " + str(err)
         }
