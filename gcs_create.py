@@ -1,7 +1,22 @@
 import os
 import tempfile
+import zipfile
 from google.cloud import storage
 from datetime import datetime, timedelta
+
+
+def extract_zip(zip_file_path, extract_folder):
+    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+        zip_ref.extractall(extract_folder)
+
+
+def get_extracted_size(extract_folder):
+    total_size = 0
+    for foldername, subfolders, filenames in os.walk(extract_folder):
+        for filename in filenames:
+            file_path = os.path.join(foldername, filename)
+            total_size += os.path.getsize(file_path)
+    return total_size
 
 
 def write_to_blob(file_resp, file_path):
