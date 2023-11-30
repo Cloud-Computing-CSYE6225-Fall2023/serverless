@@ -59,7 +59,7 @@ def lambda_handler(event, context):
 #             "id": "7121",
 #             "email": "ruthala.s@northeastern.edu"
 #         },
-#         "submission_url": "https://github.com/readmeio/import-samples/raw/master/import-sample-multiple-versions.zip",
+#         "submission_url": "https://github.com/tparikh/myrepo/archive/refs/tags/v1.0.0.zip",
 #         "submission_date": "2023-11-24T09:00"
 #     }
 #     print(lambda_handler(d, ""))
