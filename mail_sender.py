@@ -12,7 +12,7 @@ def send_email(data):
         response = requests.post(
             url=f"https://api.mailgun.net/v3/{domainName}/messages",
             auth=("api", apiKey),
-            data={"from": f"Excited User <noreply@{domainName}>",
+            data={"from": f"Assignment Notifications <noreply@{domainName}>",
                   "to": [data["email"]],
                   "template": emailTemplate,
                   "t:variables": json.dumps({
