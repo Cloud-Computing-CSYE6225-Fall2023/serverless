@@ -15,7 +15,7 @@ config:
       lambda_file_path: "./gcp_file_storage.zip"
       dependencies_file_path: "./dependencies.zip"
       gcp_project_id: csye6125-dev
-      gcp_bucket_name: assignment-submission-test
+      gcp_bucket_name: assignment-submission-dev
       dynamo_db_table_name: emails_tracking
       mailgun_domain_name: "submit-my-work.me"
       mailgun_api_key: "c2d7753f833385de0a7fb1efd6da5c22-5d2b1caa-64c3ca0c"
