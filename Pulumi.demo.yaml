@@ -2,3 +2,21 @@ encryptionsalt: v1:VgaNTYa4ZDI=:v1:VgT9BZGHItNWjGYO:pqdZzuvN6J0k1q3qiR1yXwNvkYIY
 config:
   aws:profile: demo
   aws:region: us-east-1
+  gcp:project: csye6125-demo
+  csye6215-serveless:config:
+    resource_params:
+      region: us-east-1
+      account_id: "122161639205"
+      sns_topic_name: test
+      sqs_topic_name: test
+      log_retention: 5
+      lambda_log_group: gcp_file_storage
+      lambda_func_name: gcp_file_storage
+      lambda_file_path: "./gcp_file_storage.zip"
+      dependencies_file_path: "./dependencies.zip"
+      gcp_project_id: csye6125-demo
+      gcp_bucket_name: assignment-submission-demo
+      dynamo_db_table_name: emails_tracking
+      mailgun_domain_name: "submit-my-work.me"
+      mailgun_api_key: "c2d7753f833385de0a7fb1efd6da5c22-5d2b1caa-64c3ca0c"
+      mailgun_template: "assignment submission"
